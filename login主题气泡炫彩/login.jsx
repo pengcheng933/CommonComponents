@@ -9,24 +9,24 @@ function Login() {
   const [nameValue,setNameValue]=useState('')
   const [passwordValue,setPasswordValue]=useState('')
   const [codeValue,setCodeValue]=useState('')
- // 表单提交事件
-  document.onkeydown=(event)=>{
+  // 表单提交事件
+  document.onkeydown=useCallback((event)=>{
     if(event.keyCode===13 || event.shiftKey){
       login()
     }
-  }
-  const submit=(event)=>{
+  },[])
+  const submit=useCallback((event)=>{
     event.preventDefault()
     login()
-  }
-  function login(){
+  },[])
+  const login=useCallback(()=>{
     const isNameOk=nameBlur()
     const isPasswordOk=passwordBlur()
     const isCodeOk=codeBlur()
     if( isNameOk && isPasswordOk && isCodeOk){
       console.log(1,nameValue,passwordValue,codeValue)
     }
-  }
+  },[])
   // 给表单赋值
   const nameChange=(event)=>{
     setNameValue(event.target.value)
@@ -38,7 +38,7 @@ function Login() {
     setCodeValue(event.target.value)
   }
   // 用户名验证
-  const nameBlur=()=>{
+  const nameBlur=useCallback(()=>{
     const value=nameValue.replace(/\s+/g,"") // 去除空格
     if(value===''){
       setNameErr("名字不能为空")
@@ -54,10 +54,10 @@ function Login() {
         return false
       }
     }
-  }
+  },[])
 
   // 密码验证
-  const passwordBlur=()=>{
+  const passwordBlur=useCallback(()=>{
     const value=passwordValue.replace(/\s+/g,"") // 去除空格
     if(value===''){
       setPasswprdErr("密码不能为空")
@@ -73,9 +73,9 @@ function Login() {
         return false
       }
     }
-  }
+  },[])
   // 验证码验证
-  const codeBlur=()=>{
+  const codeBlur=useCallback(()=>{
     const value=codeValue.replace(/\s+/g,"") // 去除空格
     if(value===''){
       setCode('验证码不能为空')
@@ -83,7 +83,7 @@ function Login() {
       setCode('')
       return true
     }
-  }
+  },[])
   return (
       <div className='login'>
         <section>
