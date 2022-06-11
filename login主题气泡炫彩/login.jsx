@@ -9,13 +9,22 @@ function Login() {
   const [nameValue,setNameValue]=useState('')
   const [passwordValue,setPasswordValue]=useState('')
   const [codeValue,setCodeValue]=useState('')
+ // 表单提交事件
+  document.onkeydown=(event)=>{
+    if(event.keyCode===13 || event.shiftKey){
+      login()
+    }
+  }
   const submit=(event)=>{
     event.preventDefault()
+    login()
+  }
+  function login(){
     const isNameOk=nameBlur()
     const isPasswordOk=passwordBlur()
     const isCodeOk=codeBlur()
     if( isNameOk && isPasswordOk && isCodeOk){
-      console.log(nameValue,passwordValue,codeValue)
+      console.log(1,nameValue,passwordValue,codeValue)
     }
   }
   // 给表单赋值
