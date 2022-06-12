@@ -200,7 +200,7 @@ section .color:nth-child(3) {
 
 /* 输入框样式 */
 
-.form .inputBox input {
+ .inputBox input {
   width: 100%;
   padding: 10px 20px;
   background: rgba(255, 255, 255, 0.2);
@@ -215,6 +215,18 @@ section .color:nth-child(3) {
   color: #fff;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
+  .inputPassword{
+    &>input{
+      padding-right: 40px;
+    }
+    &>.iconfont{
+      position: absolute;
+      top: 2px;
+      right: 10px;
+      font-size: 28px;
+      color: #fafafa;
+    }
+  }
 .inputCode input{
   margin-top: 20px;
   width: 50%;
