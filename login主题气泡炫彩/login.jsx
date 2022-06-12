@@ -1,6 +1,8 @@
 import React,{useState} from 'react'
 import './login.less'
 function Login() {
+  // 定义密码可见与不可见
+  const [isShow,setIsShow]=useState(false)
   // 定义错误数据
   const [nameErr,setNameErr]=useState('')
   const [passwordErr,setPasswprdErr]=useState('')
@@ -14,11 +16,11 @@ function Login() {
     if(event.keyCode===13 || event.shiftKey){
       login()
     }
-  },[])
+  },[nameValue,passwordValue,codeValue])
   const submit=useCallback((event)=>{
     event.preventDefault()
     login()
-  },[])
+  },[nameValue,passwordValue,codeValue])
   const login=useCallback(()=>{
     const isNameOk=nameBlur()
     const isPasswordOk=passwordBlur()
@@ -26,7 +28,7 @@ function Login() {
     if( isNameOk && isPasswordOk && isCodeOk){
       console.log(1,nameValue,passwordValue,codeValue)
     }
-  },[])
+  },[nameValue,passwordValue,codeValue])
   // 给表单赋值
   const nameChange=(event)=>{
     setNameValue(event.target.value)
@@ -54,7 +56,7 @@ function Login() {
         return false
       }
     }
-  },[])
+  },[nameValue])
 
   // 密码验证
   const passwordBlur=useCallback(()=>{
@@ -73,7 +75,7 @@ function Login() {
         return false
       }
     }
-  },[])
+  },[passwordValue])
   // 验证码验证
   const codeBlur=useCallback(()=>{
     const value=codeValue.replace(/\s+/g,"") // 去除空格
@@ -83,7 +85,11 @@ function Login() {
       setCode('')
       return true
     }
-  },[])
+  },[codeValue])
+  // 切换可见或不可见
+  const showChange=useCallback(()=>{
+    setIsShow(!isShow)
+  },[isShow])
   return (
       <div className='login'>
         <section>
